@@ -32,13 +32,12 @@ public class BinaryTree {
             raiz.esq = null;
             raiz.dir = null;
         } else if (item.comparaItem(raiz.item) < 0) {
-            this.raiz.esq = insercao(item, raiz.esq);
+            raiz.esq = insercao(item, raiz.esq);
         } else if (item.comparaItem(raiz.item) > 0) {
-            this.raiz.dir = insercao(item, raiz.dir);
+            raiz.dir = insercao(item, raiz.dir);
         } else {
             System.out.println("Erro: Ja tem esse item " + item + " na árvore.");
         }
-        this.raiz = raiz;
         return raiz;
     }
 
