@@ -70,20 +70,60 @@ public class BinaryTree {
         return no;
     }
 
-    public void imprime() {
-        this.central(this.raiz);
+    public void imprimeOrdemCrescente() {
+        this.centralOrdemCrescente(this.raiz);
     }
 
-    private void central(No no) {
+    private void centralOrdemCrescente(No no) {
         if (no != null) {
-            central(no.esq);
+            centralOrdemCrescente(no.esq);
             System.out.println(no.item.toString());
-            central(no.dir);
+            centralOrdemCrescente(no.dir);
+        }
+    }
+
+    public void imprimeOrdemDecrescente() {
+        this.centralOrdemDecrescente(this.raiz);
+    }
+
+    private void centralOrdemDecrescente(No no) {
+        if (no != null) {
+            centralOrdemDecrescente(no.dir);
+            System.out.println(no.item.toString());
+            centralOrdemDecrescente(no.esq);
+        }
+    }
+
+    public void imprimeOrdemAleatoriaPelaEsquerda() {
+        this.centralOrdemCrescente(this.raiz);
+    }
+
+    private void centralOrdemAleatoriaPelaEsquerda(No no) {
+        if (no != null) {
+            System.out.println(no.item.toString());
+            centralOrdemCrescente(no.esq);
+            centralOrdemCrescente(no.dir);
+        }
+    }
+
+    public void imprimeOrdemAleatoriaPelaDireita() {
+        this.centralOrdemDecrescente(this.raiz);
+    }
+
+    private void centralOrdemAleatoriaPelaDireita(No no) {
+        if (no != null) {
+            System.out.println(no.item.toString());
+            centralOrdemDecrescente(no.dir);
+            centralOrdemDecrescente(no.esq);
         }
     }
 
     public void balanceamento() {
 
+    }
+
+    public void setRaiz(No raiz) {
+        this.raiz = raiz;
     }
 
     public No getRaiz() {
