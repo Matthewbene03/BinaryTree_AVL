@@ -40,6 +40,22 @@ public class BinaryTree {
         }
         return raiz;
     }
+    
+        public void insercaoSemRetorno(Item item, No raiz) { //no = raiz
+        if (raiz == null) {
+            this.raiz = new No();
+            this.raiz.item = item;
+            this.raiz.esq = null;
+            this.raiz.dir = null;
+        } else if (item.comparaItem(raiz.item) < 0) {
+            this.raiz.esq = insercao(item, raiz.esq);
+        } else if (item.comparaItem(raiz.item) > 0) {
+            this.raiz.dir = insercao(item, raiz.dir);
+        } else {
+            System.out.println("Erro: Ja tem esse item " + item + " na árvore.");
+        }
+    }
+    
 
     private No antecessor(No q, No r) {
         if (r.dir != null) {
