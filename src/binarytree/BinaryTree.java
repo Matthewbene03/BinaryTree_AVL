@@ -40,22 +40,41 @@ public class BinaryTree {
         }
         return raiz;
     }
-    
-        public void insercaoSemRetorno(Item item, No raiz) { //no = raiz
+
+    public void insercaoSemRetorno(Item item, No raiz) { //no = raiz
         if (raiz == null) {
             this.raiz = new No();
             this.raiz.item = item;
             this.raiz.esq = null;
             this.raiz.dir = null;
         } else if (item.comparaItem(raiz.item) < 0) {
-            this.raiz.esq = insercao(item, raiz.esq);
+            insercaoSemRetorno(item, raiz.esq);
         } else if (item.comparaItem(raiz.item) > 0) {
-            this.raiz.dir = insercao(item, raiz.dir);
+            insercaoSemRetorno(item, raiz.dir);
         } else {
             System.out.println("Erro: Ja tem esse item " + item + " na árvore.");
         }
     }
-    
+
+    public void insercaoComIteracao(Item item, No no) {
+        No aux = no;
+        while (aux != null) {
+            if (item.comparaItem(aux.item) < 0) {
+                aux.esq.item = item;
+                raiz.item = aux.esq.item;
+                //raiz = aux;
+            } else if (item.comparaItem(aux.item) > 0) {
+                aux.dir.item = item;
+                raiz.item = aux.dir.item;
+                //raiz = aux;
+            }
+            raiz = aux;
+        }
+        aux.item = item;
+        aux.esq = null;
+        aux.dir = null;
+        this.raiz = aux;
+    }
 
     private No antecessor(No q, No r) {
         if (r.dir != null) {

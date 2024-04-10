@@ -6,15 +6,15 @@ public class main {
 
     public static void main(String[] args) {
 
-        //Adicionando numeros aleatorios na árvore sem retorno
+        //Adicionando numeros aleatorios na árvore por iteração
         BinaryTree tree = new BinaryTree();
         Random r = new Random();
         int num1 = 1 + r.nextInt(101);
-        tree.insercaoSemRetorno(new Item(num1), tree.getRaiz()); // Adiciono um numero a raiz
+        tree.insercaoComIteracao(new Item(num1), tree.getRaiz()); // Adiciono um numero a raiz
         for (int i = 1; i <= 10; i++) {
             int num2 = 1 + r.nextInt(101);
             if (num2 != num1) {
-                tree.insercao(new Item(num2), tree.getRaiz()); // Adiciono outros elementos a árvore
+                tree.insercaoComIteracao(new Item(num2), tree.getRaiz()); // Adiciono outros elementos a árvore
             }
 
         }
@@ -42,6 +42,21 @@ public class main {
         System.out.println("--------------------------------------");
     }
 }
+
+/*
+        //Adicionando numeros aleatorios na árvore sem retorno
+        BinaryTree tree = new BinaryTree();
+        Random r = new Random();
+        int num1 = 1 + r.nextInt(101);
+        tree.insercaoSemRetorno(new Item(num1), tree.getRaiz()); // Adiciono um numero a raiz
+        for (int i = 1; i <= 10; i++) {
+            int num2 = 1 + r.nextInt(101);
+            if (num2 != num1) {
+                tree.insercaoSemRetorno(new Item(num2), tree.getRaiz()); // Adiciono outros elementos a árvore
+            }
+
+        }
+*/
 
 /*
 //Adicionando numeros aleatorios na árvore com retorno 
