@@ -2,46 +2,17 @@ package binarytree;
 
 public class BinaryTree {
 
-    //Uma arvore binaria tem um os nós a esquerda e a direita. 
+    //Uma arvore binaria tem um os nós a esquerda e a direita, começando pela raiz. 
     No raiz;
 
-    //Os metodos que um árvore pode ter é: Inserção, remoção, busca, balanceamento, imprimir árvore.
     public BinaryTree() {
         this.raiz = null;
     }
 
-    public Item pesquisa(Item item) {
-        return this.pesquisa(item, this.raiz);
-    }
-
-    private Item pesquisa(Item item, No no) {
-        if (no == null) {
-            return null;
-        } else if (item.comparaItem(no.item) < 0) {
-            return pesquisa(item, no.esq);
-        } else if (item.comparaItem(no.item) > 0) {
-            return pesquisa(item, no.dir);
-        }
-        return no.item;
-    }
-
-    public Item pesquisaIte(Item item) {
-        return this.pesquisaIte(item, this.raiz);
-    }
-
-    private Item pesquisaIte(Item item, No no) {
-        while (no != null) {
-            if (item.comparaItem(no.item) < 0) {
-                no = no.esq;
-            } else if (item.comparaItem(no.item) > 0) {
-                no = no.dir;
-            } else {
-                return no.item;
-            }
-        }
-        return null;
-    }
-
+    //Os metodos que um árvore pode ter é: Inserção, remoção, busca, balanceamento, imprimir árvore.
+    
+    //Metodos de inserir: 
+    
     public No insercao(Item item, No raiz) { //no = raiz
         if (raiz == null) {
             raiz = new No();
@@ -79,25 +50,69 @@ public class BinaryTree {
             }
         }
     }
-//    public void insercaoComIteracao(Item item, No no) {
-//        No aux = no;
-//        while (aux != null) {
-//            if (item.comparaItem(aux.item) < 0) {
-//                aux.esq.item = item;
-//                raiz.item = aux.esq.item;
-//                //raiz = aux;
-//            } else if (item.comparaItem(aux.item) > 0) {
-//                aux.dir.item = item;
-//                raiz.item = aux.dir.item;
-//                //raiz = aux;
-//            }
-//            raiz = aux;
-//        }
-//        aux.item = item;
-//        aux.esq = null;
-//        aux.dir = null;
-//        this.raiz = aux;
-//}
+    
+    public No insercaoComIteração (Item item, No no){
+        No aux = no;
+        while (aux != null){
+            if(item.comparaItem(no.item)<0){
+                if(no.esq != null){
+                    break;
+                } else{
+                    aux.esq = new No(item);
+                    return aux;
+                }
+            } else if(item.comparaItem(no.item)>0){
+                if(no.dir != null){
+                    break;
+                } else{
+                    aux.dir = new No(item);
+                    return aux;
+                }
+            } else {
+                System.out.println("Erro: Ja tem esse item " + item + " na árvore.");
+            }
+        }
+        aux = new No(item);
+        return aux;
+    }
+
+    //Metodos de inserir: 
+    
+    //Metodos de pesquisa: 
+    
+    public Item pesquisa(Item item) {
+        return this.pesquisa(item, this.raiz);
+    }
+
+    private Item pesquisa(Item item, No no) {
+        if (no == null) {
+            return null;
+        } else if (item.comparaItem(no.item) < 0) {
+            return pesquisa(item, no.esq);
+        } else if (item.comparaItem(no.item) > 0) {
+            return pesquisa(item, no.dir);
+        }
+        return no.item;
+    }
+
+    public Item pesquisaIte(Item item) {
+        return this.pesquisaIte(item, this.raiz);
+    }
+
+    private Item pesquisaIte(Item item, No no) {
+        while (no != null) {
+            if (item.comparaItem(no.item) < 0) {
+                no = no.esq;
+            } else if (item.comparaItem(no.item) > 0) {
+                no = no.dir;
+            } else {
+                return no.item;
+            }
+        }
+        return null;
+    }
+    
+    //Metodos de pesquisa: 
 
     private No antecessor(No q, No r) {
         if (r.dir != null) {

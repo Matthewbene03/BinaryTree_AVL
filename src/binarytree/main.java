@@ -4,9 +4,9 @@ public class main {
 
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
-        tree.insercaoSemRetorno(new Item(10), tree.getRaiz()); //Árvore vazia, Raiz null.
-        tree.insercaoSemRetorno(new Item(5), tree.getRaiz()); // Árvore com o num 10, colocar o 5 a esquerda do 10.
-        tree.insercaoSemRetorno(new Item(15), tree.getRaiz());
+        tree.setRaiz(tree.insercaoComIteração(new Item(10), tree.getRaiz())); //Árvore vazia, Raiz null.
+        tree.setRaiz(tree.insercaoComIteração(new Item(5), tree.getRaiz())); // Árvore com o num 10, colocar o 5 a esquerda do 10.
+        tree.setRaiz(tree.insercaoComIteração(new Item(15), tree.getRaiz()));
         tree.imprimeOrdemCrescente();
 
     }
