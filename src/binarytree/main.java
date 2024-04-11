@@ -1,65 +1,19 @@
 package binarytree;
 
-import java.util.Random;
-
 public class main {
 
     public static void main(String[] args) {
-
-        //Adicionando numeros aleatorios na árvore por iteração
         BinaryTree tree = new BinaryTree();
-        Random r = new Random();
-        int num1 = 1 + r.nextInt(101);
-        tree.insercaoComIteracao(new Item(num1), tree.getRaiz()); // Adiciono um numero a raiz
-        for (int i = 1; i <= 10; i++) {
-            int num2 = 1 + r.nextInt(101);
-            if (num2 != num1) {
-                tree.insercaoComIteracao(new Item(num2), tree.getRaiz()); // Adiciono outros elementos a árvore
-            }
-
-        }
-
-        //Vou imprimir a árvore de varias formas possiveis. 
-        System.out.println("A raiz dessa árvore é: " + num1);
-        System.out.println("--------------------------------------");
-        System.out.println("Ordem crescente: ");
+        tree.insercaoSemRetorno(new Item(10), tree.getRaiz()); //Árvore vazia, Raiz null.
+        tree.insercaoSemRetorno(new Item(5), tree.getRaiz()); // Árvore com o num 10, colocar o 5 a esquerda do 10.
+        tree.insercaoSemRetorno(new Item(15), tree.getRaiz());
         tree.imprimeOrdemCrescente();
-        System.out.println("--------------------------------------");
 
-        System.out.println("\n--------------------------------------");
-        System.out.println("Ordem decrescente: ");
-        tree.imprimeOrdemDecrescente();
-        System.out.println("--------------------------------------");
-
-        System.out.println("\n--------------------------------------");
-        System.out.println("Ordem pela esquerda: ");
-        tree.imprimeOrdemAleatoriaPelaEsquerda();
-        System.out.println("--------------------------------------");
-
-        System.out.println("\n--------------------------------------");
-        System.out.println("Ordem pela direita: ");
-        tree.imprimeOrdemAleatoriaPelaDireita();
-        System.out.println("--------------------------------------");
     }
 }
 
 /*
-        //Adicionando numeros aleatorios na árvore sem retorno
-        BinaryTree tree = new BinaryTree();
-        Random r = new Random();
-        int num1 = 1 + r.nextInt(101);
-        tree.insercaoSemRetorno(new Item(num1), tree.getRaiz()); // Adiciono um numero a raiz
-        for (int i = 1; i <= 10; i++) {
-            int num2 = 1 + r.nextInt(101);
-            if (num2 != num1) {
-                tree.insercaoSemRetorno(new Item(num2), tree.getRaiz()); // Adiciono outros elementos a árvore
-            }
-
-        }
-*/
-
-/*
-//Adicionando numeros aleatorios na árvore com retorno 
+        //Adicionando numeros aleatorios na árvore com retorno
         BinaryTree tree = new BinaryTree();
         Random r = new Random();
         int num1 = 1 + r.nextInt(101);
@@ -71,4 +25,36 @@ public class main {
             }
 
         }
-*/
+
+        //Vou imprimir a árvore de varias formas possiveis. 
+        System.out.println("A raiz dessa árvore é: " + 10);
+        System.out.println("--------------------------------------");
+        System.out.println("Ordem crescente: ");
+        tree.imprimeOrdemCrescente();
+        System.out.println("--------------------------------------");
+
+        System.out.println("Busca recursiva: ");
+        //Buscar um item (metodo pesquisa recursivo)
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        Item i = tree.pesquisa(new Item(num));
+        if (i == null) {
+            System.out.println("Valor não encontrado!");
+        } else {
+            System.out.println("valor encontrado: " + i.toString());
+        }
+        //Buscar um item (metodo pesquisa recursivo)
+
+        System.out.println("--------------------------------------");
+
+        System.out.println("Busca iterativa: ");
+        //Buscar um item (metodo pesquisa iterativo)
+        num = sc.nextInt();
+        i = tree.pesquisaIte(new Item(num));
+        if (i == null) {
+            System.out.println("Valor não encontrado!");
+        } else {
+            System.out.println("valor encontrado: " + i.toString());
+        }
+        //Buscar um item (metodo pesquisa iterativo)
+ */

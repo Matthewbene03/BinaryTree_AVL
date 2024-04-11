@@ -14,7 +14,7 @@ public class BinaryTree {
         return this.pesquisa(item, this.raiz);
     }
 
-    public Item pesquisa(Item item, No no) {
+    private Item pesquisa(Item item, No no) {
         if (no == null) {
             return null;
         } else if (item.comparaItem(no.item) < 0) {
@@ -23,6 +23,23 @@ public class BinaryTree {
             return pesquisa(item, no.dir);
         }
         return no.item;
+    }
+
+    public Item pesquisaIte(Item item) {
+        return this.pesquisaIte(item, this.raiz);
+    }
+
+    private Item pesquisaIte(Item item, No no) {
+        while (no != null) {
+            if (item.comparaItem(no.item) < 0) {
+                no = no.esq;
+            } else if (item.comparaItem(no.item) > 0) {
+                no = no.dir;
+            } else {
+                return no.item;
+            }
+        }
+        return null;
     }
 
     public No insercao(Item item, No raiz) { //no = raiz
@@ -41,40 +58,46 @@ public class BinaryTree {
         return raiz;
     }
 
-    public void insercaoSemRetorno(Item item, No raiz) { //no = raiz
-        if (raiz == null) {
-            this.raiz = new No();
-            this.raiz.item = item;
-            this.raiz.esq = null;
-            this.raiz.dir = null;
-        } else if (item.comparaItem(raiz.item) < 0) {
-            insercaoSemRetorno(item, raiz.esq);
-        } else if (item.comparaItem(raiz.item) > 0) {
-            insercaoSemRetorno(item, raiz.dir);
+    public void insercaoSemRetorno(Item item, No no) {
+        if (no == null) {
+            raiz = new No(item);
         } else {
-            System.out.println("Erro: Ja tem esse item " + item + " na árvore.");
-        }
-    }
-
-    public void insercaoComIteracao(Item item, No no) {
-        No aux = no;
-        while (aux != null) {
-            if (item.comparaItem(aux.item) < 0) {
-                aux.esq.item = item;
-                raiz.item = aux.esq.item;
-                //raiz = aux;
-            } else if (item.comparaItem(aux.item) > 0) {
-                aux.dir.item = item;
-                raiz.item = aux.dir.item;
-                //raiz = aux;
+            if (item.comparaItem(raiz.item) < 0) {
+                if (no.esq != null) {
+                    insercaoSemRetorno(item, raiz.esq);
+                } else {
+                    raiz.esq = new No(item);
+                }
+            } else if (item.comparaItem(raiz.item) > 0) {
+                if (no.dir != null) {
+                    insercaoSemRetorno(item, raiz.dir);
+                } else {
+                    raiz.dir = new No(item);
+                }
+            } else {
+                System.out.println("Erro: Ja tem esse item " + item + " na árvore.");
             }
-            raiz = aux;
         }
-        aux.item = item;
-        aux.esq = null;
-        aux.dir = null;
-        this.raiz = aux;
     }
+//    public void insercaoComIteracao(Item item, No no) {
+//        No aux = no;
+//        while (aux != null) {
+//            if (item.comparaItem(aux.item) < 0) {
+//                aux.esq.item = item;
+//                raiz.item = aux.esq.item;
+//                //raiz = aux;
+//            } else if (item.comparaItem(aux.item) > 0) {
+//                aux.dir.item = item;
+//                raiz.item = aux.dir.item;
+//                //raiz = aux;
+//            }
+//            raiz = aux;
+//        }
+//        aux.item = item;
+//        aux.esq = null;
+//        aux.dir = null;
+//        this.raiz = aux;
+//}
 
     private No antecessor(No q, No r) {
         if (r.dir != null) {
@@ -136,8 +159,8 @@ public class BinaryTree {
     private void centralOrdemAleatoriaPelaEsquerda(No no) {
         if (no != null) {
             System.out.println(no.item.toString());
-            centralOrdemCrescente(no.esq);
-            centralOrdemCrescente(no.dir);
+            centralOrdemAleatoriaPelaEsquerda(no.esq);
+            centralOrdemAleatoriaPelaEsquerda(no.dir);
         }
     }
 
@@ -148,8 +171,8 @@ public class BinaryTree {
     private void centralOrdemAleatoriaPelaDireita(No no) {
         if (no != null) {
             System.out.println(no.item.toString());
-            centralOrdemDecrescente(no.dir);
-            centralOrdemDecrescente(no.esq);
+            centralOrdemAleatoriaPelaDireita(no.dir);
+            centralOrdemAleatoriaPelaDireita(no.esq);
         }
     }
 

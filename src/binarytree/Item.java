@@ -27,6 +27,6 @@ public class Item {
     }    
     
     public String toString(){
-        return "No: " + chave;
+        return "" + chave;
     }
 }
