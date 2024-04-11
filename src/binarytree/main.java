@@ -6,21 +6,26 @@ public class main {
 
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
-
+        
         tree.insercaoSemRetorno(new Item (10), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (05), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (5), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (3), tree.getRaiz());
         tree.insercaoSemRetorno(new Item (15), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (03), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (12), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (11), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (13), tree.getRaiz());
         tree.insercaoSemRetorno(new Item (16), tree.getRaiz());
         tree.insercaoSemRetorno(new Item (17), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (18), tree.getRaiz());
+
+
+
         
         
         System.out.println("Raiz: " + 10);
         tree.imprimeOrdemCrescente();
         
-        System.out.println("Altura: " + tree.alturaArvore());
-        System.out.println("Altura esq: " + tree.getAltura().getAlturaEsq());
-        System.out.println("Altura dir: " + tree.getAltura().getAlturaDir());
+        System.out.println("Altura: " + tree.alturaArvore(tree.getRaiz()));
     }
 }
 
