@@ -4,9 +4,11 @@ public class BinaryTree {
 
     //Uma arvore binaria tem um os nós a esquerda e a direita, começando pela raiz. 
     No raiz;
+    private AlturaArvore altura;
 
     public BinaryTree() {
         this.raiz = null;
+        this.altura = new AlturaArvore();
     }
 
     //Os metodos que um árvore pode ter é: Inserção, remoção, busca, balanceamento, imprimir árvore.
@@ -29,51 +31,30 @@ public class BinaryTree {
         return raiz;
     }
 
-    public void insercaoSemRetorno(Item item, No no) {
+    public void insercaoSemRetorno(Item item, No no) {//10 - 5 - 
         if (no == null) {
             raiz = new No(item);
+            this.altura.alturaArvoreEsq();
+            this.altura.alturaArvoreDir();
         } else {
-            if (item.comparaItem(raiz.item) < 0) {
+            if (item.comparaItem(no.item) < 0) {
                 if (no.esq != null) {
-                    insercaoSemRetorno(item, raiz.esq);
+                    insercaoSemRetorno(item, no.esq);
                 } else {
-                    raiz.esq = new No(item);
+                    no.esq = new No(item);
+                    this.altura.alturaArvoreEsq();
                 }
-            } else if (item.comparaItem(raiz.item) > 0) {
+            } else if (item.comparaItem(no.item) > 0) {
                 if (no.dir != null) {
-                    insercaoSemRetorno(item, raiz.dir);
+                    insercaoSemRetorno(item, no.dir);
                 } else {
-                    raiz.dir = new No(item);
+                    no.dir = new No(item);
+                    this.altura.alturaArvoreDir();
                 }
             } else {
                 System.out.println("Erro: Ja tem esse item " + item + " na árvore.");
             }
         }
-    }
-    
-    public No insercaoComIteração (Item item, No no){
-        No aux = no;
-        while (aux != null){
-            if(item.comparaItem(no.item)<0){
-                if(no.esq != null){
-                    break;
-                } else{
-                    aux.esq = new No(item);
-                    return aux;
-                }
-            } else if(item.comparaItem(no.item)>0){
-                if(no.dir != null){
-                    break;
-                } else{
-                    aux.dir = new No(item);
-                    return aux;
-                }
-            } else {
-                System.out.println("Erro: Ja tem esse item " + item + " na árvore.");
-            }
-        }
-        aux = new No(item);
-        return aux;
     }
 
     //Metodos de inserir: 
@@ -143,6 +124,7 @@ public class BinaryTree {
         return no;
     }
 
+    //Metodos para imprimir: 
     public void imprimeOrdemCrescente() {
         this.centralOrdemCrescente(this.raiz);
     }
@@ -190,6 +172,25 @@ public class BinaryTree {
             centralOrdemAleatoriaPelaDireita(no.esq);
         }
     }
+    
+    //Metodos para imprimir: 
+    
+    //Metodos para calcular altura: 
+    
+    public Integer alturaArvore(){
+        Integer aux = 0;
+        if(this.raiz == null){
+            return aux;
+        }
+        if(this.altura.getAlturaEsq() >= this.altura.getAlturaDir()){
+            aux = altura.getAlturaEsq();
+        } else if (this.altura.getAlturaDir() > this.altura.getAlturaEsq()){
+            aux = altura.getAlturaDir();
+        }
+        return aux;
+    }
+    
+    //Metodos para calcular altura: 
 
     public void balanceamento() {
 
@@ -201,5 +202,9 @@ public class BinaryTree {
 
     public No getRaiz() {
         return this.raiz;
+    }
+    
+    public AlturaArvore getAltura() {
+        return this.altura;
     }
 }

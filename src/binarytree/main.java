@@ -1,14 +1,26 @@
 package binarytree;
 
+import java.util.Random;
+
 public class main {
 
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
-        tree.setRaiz(tree.insercaoComIteração(new Item(10), tree.getRaiz())); //Árvore vazia, Raiz null.
-        tree.setRaiz(tree.insercaoComIteração(new Item(5), tree.getRaiz())); // Árvore com o num 10, colocar o 5 a esquerda do 10.
-        tree.setRaiz(tree.insercaoComIteração(new Item(15), tree.getRaiz()));
-        tree.imprimeOrdemCrescente();
 
+        tree.insercaoSemRetorno(new Item (10), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (05), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (15), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (03), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (16), tree.getRaiz());
+        tree.insercaoSemRetorno(new Item (17), tree.getRaiz());
+        
+        
+        System.out.println("Raiz: " + 10);
+        tree.imprimeOrdemCrescente();
+        
+        System.out.println("Altura: " + tree.alturaArvore());
+        System.out.println("Altura esq: " + tree.getAltura().getAlturaEsq());
+        System.out.println("Altura dir: " + tree.getAltura().getAlturaDir());
     }
 }
 
