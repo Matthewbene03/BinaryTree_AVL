@@ -1,31 +1,29 @@
 package binarytree;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class main {
 
     public static void main(String[] args) {
+        //Adicionando numeros aleatorios na árvore com retorno
         BinaryTree tree = new BinaryTree();
+        Random r = new Random();
+        int num1 = 1 + r.nextInt(101);
+        tree.setRaiz(tree.insercao(new Item(num1), tree.getRaiz())); // Adiciono um numero a raiz
+        for (int i = 1; i <= 10; i++) {
+            int num2 = 1 + r.nextInt(101);
+                tree.setRaiz(tree.insercao(new Item(num2), tree.getRaiz())); // Adiciono outros elementos a árvore
+        }
+        System.out.println("Raiz: " + num1);
         
-        tree.insercaoSemRetorno(new Item (10), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (5), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (3), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (15), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (12), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (11), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (13), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (16), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (17), tree.getRaiz());
-        tree.insercaoSemRetorno(new Item (18), tree.getRaiz());
-
-
-
-        
-        
-        System.out.println("Raiz: " + 10);
+        System.out.println("Impressão por iteração: ");
+        tree.imprimeIteracao();
+        System.out.println();
+        System.out.println("------------------------------------------------");
+        System.out.println("Impressão por recursividade: ");
         tree.imprimeOrdemCrescente();
-        
-        System.out.println("Altura: " + tree.alturaArvore(tree.getRaiz()));
+        System.out.println();
     }
 }
 

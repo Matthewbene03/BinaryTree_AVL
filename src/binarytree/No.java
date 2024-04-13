@@ -1,6 +1,6 @@
 package binarytree;
 
-public class No {
+public class No implements Comparable<No>{
     public Item item;
     public No esq, dir;
     
@@ -14,5 +14,10 @@ public class No {
         this.item = item;
         this.esq = null;
         this.dir = null;
+    }
+
+    @Override
+    public int compareTo(No no) {
+        return (this.item.recuperaChave() - no.item.recuperaChave());
     }
 }

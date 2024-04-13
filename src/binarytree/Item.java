@@ -1,6 +1,6 @@
 package binarytree;
 
-public class Item {
+public class Item{
 
     private Integer chave;
     
@@ -22,7 +22,7 @@ public class Item {
         this.chave = ch.intValue();
     }
     
-    public Object recuperaChave(){
+    public Integer recuperaChave(){
         return this.chave;
     }    
     
