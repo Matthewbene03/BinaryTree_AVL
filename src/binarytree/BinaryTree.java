@@ -109,13 +109,22 @@ public class BinaryTree {
             no.dir = retira(item, no.dir);
         } else {
             if (no.dir == null) {
+                this.noArvore.remove(no);
                 no = no.esq;
             } else if (no.esq == null) {
+                this.noArvore.remove(no);
                 no = no.dir;
             } else {
+                this.noArvore.remove(no);
                 no.esq = antecessor(no, no.esq);
             }
         }
+        return no;
+    }
+
+    public No ret(Item item, No no) {
+        No aux = this.retira(item, no);
+        this.noArvore.remove(aux);
         return no;
     }
 
@@ -210,5 +219,9 @@ public class BinaryTree {
 
     public No getRaiz() {
         return this.raiz;
+    }
+
+    public ArrayList<No> getNoArvore() {
+        return this.noArvore;
     }
 }
