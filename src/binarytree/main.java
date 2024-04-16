@@ -6,27 +6,32 @@ import java.util.Scanner;
 public class main {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner (System.in);
+        Scanner sc = new Scanner(System.in);
         BinaryTree tree = new BinaryTree();
-
-        Random r = new Random();
-        int num1 = 1 + r.nextInt(101);
-        tree.setRaiz(tree.insercao(new Item(num1), tree.getRaiz())); // Adiciono um numero a raiz
-        for (int i = 1; i <= 10; i++) {
-            int num2 = 1 + r.nextInt(101);
-            tree.setRaiz(tree.insercao(new Item(num2), tree.getRaiz())); // Adiciono outros elementos a árvore
-        }
-        System.out.println("Raiz: " + num1);
-        tree.imprimeOrdemCrescente();
+        tree.setRaiz(tree.insercao(new Item(10), tree.getRaiz())); // Adiciono um numero a raiz
+        tree.setRaiz(tree.insercao(new Item(5), tree.getRaiz())); // Adiciono um numero a raiz
+        tree.setRaiz(tree.insercao(new Item(3), tree.getRaiz())); // Adiciono um numero a raiz
+        //tree.imprimirArvore(tree.getRaiz(), 1);
+        tree.imprimirArvore(tree.getRaiz(), 1);
         System.out.println();
-        System.out.print("Escolha um numero para ser removido dessa árvore: ");
-        int x = sc.nextInt();
-        tree.retira(new Item(x),tree.getRaiz());
-        
-        System.out.println("------------------------------------------------");
-        tree.imprimeOrdemCrescente();
-        System.out.println();
-        
+//
+//        Random r = new Random();
+//        int num1 = 1 + r.nextInt(101);
+//        tree.setRaiz(tree.insercao(new Item(num1), tree.getRaiz())); // Adiciono um numero a raiz
+//        for (int i = 1; i <= 10; i++) {
+//            int num2 = 1 + r.nextInt(101);
+//            tree.setRaiz(tree.insercao(new Item(num2), tree.getRaiz())); // Adiciono outros elementos a árvore
+//        }
+//        System.out.println("Raiz: " + num1);
+//        tree.imprimeOrdemCrescente();
+//        System.out.println();
+//        System.out.print("Escolha um numero para ser removido dessa árvore: ");
+//        int x = sc.nextInt();
+//        tree.retira(new Item(x),tree.getRaiz());
+//        
+//        System.out.println("------------------------------------------------");
+//        tree.imprimeOrdemCrescente();
+//        System.out.println();
     }
 }
 

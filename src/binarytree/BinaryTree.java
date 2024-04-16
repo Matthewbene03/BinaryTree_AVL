@@ -31,12 +31,11 @@ public class BinaryTree {
             raiz.dir = insercao(item, raiz.dir);
         }
 
-//        //Calcula a altura do no.
-//        raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir)) + 1;
-//
-//        //Faz o balanceamento
-//        raiz = balanceamento(raiz);
+        //Calcula a altura do no.
+        raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir)) + 1;
 
+        //Faz o balanceamento
+        raiz = balanceamento(raiz);
         return raiz;
     }
 
@@ -134,12 +133,11 @@ public class BinaryTree {
             }
         }
 
-//        //Calcula a altura do no.
-//        no.altura = maior(alturaDoNo(no.esq), alturaDoNo(no.dir)) - 1;
-//        
-//        //Faz o balanceamento
-//        no = balanceamento(no);
-
+        //Calcula a altura do no.
+        no.altura = maior(alturaDoNo(no.esq), alturaDoNo(no.dir)) + 1;
+        
+        //Faz o balanceamento
+        no = balanceamento(no);
         return no;
     }
 
@@ -207,6 +205,21 @@ public class BinaryTree {
         Collections.sort(noArvore);
     }
 
+    public void imprimirArvore(No no, int nivel){
+        int i;
+        if(no != null){
+            imprimirArvore(no.dir, nivel+1);
+            System.out.print("\n\n");
+            
+            for (i = 0; i < nivel; i++) {
+                System.out.print("\t");
+            }
+            
+            System.out.print("[" + no.item + "]");
+            imprimirArvore(no.esq, nivel+1);
+        }
+    }
+    
     //(Fim)Metodos para imprimir: 
     //Parte da árvore AVL (Inicio): 
     //(Inicio)Metodos para calcular altura: 
@@ -247,30 +260,32 @@ public class BinaryTree {
         futuraRaiz.dir = raiz;
         raiz.esq = filho;
 
+        raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir)) + 1;
+        futuraRaiz.altura = maior(alturaDoNo(futuraRaiz.esq), alturaDoNo(futuraRaiz.dir)) + 1;
         return futuraRaiz;
     }
 
-    private No rotacaoEsquerda(No raiz) {
+    private No rotacaoEsquerda(No raiz) {// 10 - 15 - 20
         No futuraRaiz, filho;
 
-        futuraRaiz = raiz.dir;
-        filho = futuraRaiz.esq;
+        futuraRaiz = raiz.dir; //futuraRaiz = 15;
+        filho = futuraRaiz.esq; // filho = null
 
-        futuraRaiz.esq = raiz;
-        raiz.dir = filho;
+        futuraRaiz.esq = raiz; // Esquerda da FuturaRaiz = 10
+        raiz.dir = filho; // 
 
-        raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir))+1;
-        futuraRaiz.altura = maior(alturaDoNo(futuraRaiz.esq), alturaDoNo(futuraRaiz.dir))+1;
+        raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir)) + 1;
+        futuraRaiz.altura = maior(alturaDoNo(futuraRaiz.esq), alturaDoNo(futuraRaiz.dir)) + 1;
         return futuraRaiz;
     }
 
     private No rotacaoDireitaEsquerda(No raiz) {
-        this.rotacaoDireita(raiz.dir);
+        raiz.dir = this.rotacaoDireita(raiz.dir);
         return this.rotacaoEsquerda(raiz);
     }
 
     private No rotacaoEsquerdaDireita(No raiz) {
-        this.rotacaoEsquerda(raiz.esq);
+        raiz.esq = this.rotacaoEsquerda(raiz.esq);
         return this.rotacaoDireita(raiz);
     }
 
@@ -284,15 +299,15 @@ public class BinaryTree {
 
     private No balanceamento(No no) {
         int fb = fatorDeBalanceamento(no);
-        
-        if (fb<-1 && fatorDeBalanceamento(no.dir)<=0) {
-            this.rotacaoEsquerda(no);
-        } else if (fb>1 && fatorDeBalanceamento(no.esq) >=0) {
-            this.rotacaoDireita(no);
-        } else if (fb>1 && fatorDeBalanceamento(no.esq)<0) {
-            this.rotacaoDireitaEsquerda(no);
-        } else if (fb<-1 && fatorDeBalanceamento(no.dir)>0){
-            this.rotacaoEsquerdaDireita(no);
+
+        if (fb < -1 && fatorDeBalanceamento(no.dir) <= 0) {
+            no = this.rotacaoEsquerda(no);
+        } else if (fb > 1 && fatorDeBalanceamento(no.esq) >= 0) {
+            no = this.rotacaoDireita(no);
+        } else if (fb > 1 && fatorDeBalanceamento(no.esq) < 0) {
+            no = this.rotacaoDireitaEsquerda(no);
+        } else if (fb < -1 && fatorDeBalanceamento(no.dir) > 0) {
+            no = this.rotacaoEsquerdaDireita(no);
         }
         return no;
     }
