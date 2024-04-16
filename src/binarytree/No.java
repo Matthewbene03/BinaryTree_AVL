@@ -3,6 +3,7 @@ package binarytree;
 public class No implements Comparable<No>{
     public Item item;
     public No esq, dir;
+    public Integer altura; 
     
     public No (){
         this.item = null;
@@ -20,4 +21,6 @@ public class No implements Comparable<No>{
     public int compareTo(No no) {
         return (this.item.recuperaChave() - no.item.recuperaChave());
     }
+    
+    
 }

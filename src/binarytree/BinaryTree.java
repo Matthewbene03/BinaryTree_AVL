@@ -23,12 +23,20 @@ public class BinaryTree {
             raiz.item = item;
             raiz.esq = null;
             raiz.dir = null;
+            raiz.altura = 0;
             this.noArvore.add(raiz);
         } else if (item.comparaItem(raiz.item) < 0) {
             raiz.esq = insercao(item, raiz.esq);
         } else if (item.comparaItem(raiz.item) > 0) {
             raiz.dir = insercao(item, raiz.dir);
         }
+
+        //Calcula a altura do no.
+        raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir)) + 1;
+
+        //Faz o balanceamento
+        raiz = balanceamento(raiz);
+
         return raiz;
     }
 
@@ -53,6 +61,12 @@ public class BinaryTree {
                 }
             }
         }
+
+        //Calcula a altura do no.
+        raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir)) + 1;
+
+        //Faz o balanceamento
+        //raiz = balanceamento(raiz);
     }
 
     //(Fim)Metodos de inserir: 
@@ -119,12 +133,12 @@ public class BinaryTree {
                 no.esq = antecessor(no, no.esq);
             }
         }
-        return no;
-    }
 
-    public No ret(Item item, No no) {
-        No aux = this.retira(item, no);
-        this.noArvore.remove(aux);
+        //Calcula a altura do no.
+        no.altura = maior(alturaDoNo(no.esq), alturaDoNo(no.dir)) - 1;
+        //Faz o balanceamento
+        //no = balanceamento(no);
+
         return no;
     }
 
@@ -192,9 +206,28 @@ public class BinaryTree {
         Collections.sort(noArvore);
     }
 
+    public void centralImprimir(No no, int nivel) {
+        this.imprimeArvore(no, nivel);
+    }
+
+    private void imprimeArvore(No no, int nivel) {
+        if (no != null) {
+            imprimeArvore(no.dir, nivel + 1);
+            System.out.print("\n\n");
+
+            for (int i = 0; i < nivel; i++) {
+                System.out.print("\t");
+            }
+
+            System.out.print(no.item);
+            imprimeArvore(no.esq, nivel + 1);
+        }
+    }
+
     //(Fim)Metodos para imprimir: 
+    //Parte da árvore AVL (Inicio): 
     //(Inicio)Metodos para calcular altura: 
-    public Integer alturaArvore(No no) {
+    public Integer alturaArvore(No no) { //Altura da árvore por completo
         if (no == null) {
             return -1;
         } else {
@@ -208,11 +241,78 @@ public class BinaryTree {
         }
     }
 
-    //(Fim)Metodos para calcular altura: 
-    public void balanceamento() {
-
+    private Integer maior(Integer a, Integer b) {
+        return (a > b) ? a : b;
     }
 
+    private Integer alturaDoNo(No no) {
+        if (no == null) {
+            return -1;
+        } else {
+            return no.altura;
+        }
+    }
+
+    //(Fim)Metodos para calcular altura:
+    //Parte da árvore AVL (Inicio): 
+    private No rotacaoDireita(No raiz) {
+        No futuraRaiz, filho;
+
+        futuraRaiz = raiz.esq;
+        filho = futuraRaiz.dir;
+
+        futuraRaiz.dir = raiz;
+        raiz.esq = filho;
+
+        return futuraRaiz;
+    }
+
+    private No rotacaoEsquerda(No raiz) {
+        No futuraRaiz, filho;
+
+        futuraRaiz = raiz.dir;
+        filho = futuraRaiz.esq;
+
+        futuraRaiz.esq = raiz;
+        raiz.dir = filho;
+
+        return futuraRaiz;
+    }
+
+    private No rotacaoDireitaEsquerda(No raiz) {
+        this.rotacaoDireita(raiz.dir);
+        return this.rotacaoEsquerda(raiz);
+    }
+
+    private No rotacaoEsquerdaDireita(No raiz) {
+        this.rotacaoEsquerda(raiz.esq);
+        return this.rotacaoDireita(raiz);
+    }
+
+    private Integer fatorDeBalanceamento(No no) {
+        if (no != null) {
+            return (this.alturaDoNo(no.esq) - this.alturaDoNo(no.dir));
+        } else {
+            return 0;
+        }
+    }
+
+    private No balanceamento(No no) {
+        int fb = fatorDeBalanceamento(no);
+        
+        if (fb<-1 && fatorDeBalanceamento(no.dir)<=0) {
+            this.rotacaoEsquerda(no);
+        } else if (fb>1 && fatorDeBalanceamento(no.esq) >=0) {
+            this.rotacaoDireita(no);
+        } else if (fb>1 && fatorDeBalanceamento(no.esq)<0) {
+            this.rotacaoDireitaEsquerda(no);
+        } else if (fb<-1 && fatorDeBalanceamento(no.dir)>0){
+            this.rotacaoEsquerdaDireita(no);
+        }
+        return no;
+    }
+
+    //Parte da árvore AVL (Fim): 
     public void setRaiz(No raiz) {
         this.raiz = raiz;
     }

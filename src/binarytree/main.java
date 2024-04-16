@@ -6,55 +6,15 @@ import java.util.Scanner;
 public class main {
 
     public static void main(String[] args) {
-
-        //tree.setRaiz(tree.insercao(new Item(05), tree.getRaiz()));
-//
-//        tree.setRaiz(tree.insercao(new Item(03), tree.getRaiz()));
-//
-//        tree.setRaiz(tree.insercao(new Item(02), tree.getRaiz()));
-//
-//        tree.setRaiz(tree.insercao(new Item(04), tree.getRaiz()));
-//
-//        tree.setRaiz(tree.insercao(new Item(06), tree.getRaiz()));
-//
-//        tree.setRaiz(tree.insercao(new Item(07), tree.getRaiz()));
-//
-//        tree.setRaiz(tree.insercao(new Item(15), tree.getRaiz()));
-//
-//        tree.setRaiz(tree.insercao(new Item(17), tree.getRaiz()));
-//
-//        tree.setRaiz(tree.insercao(new Item(16), tree.getRaiz()));
-        //Adicionando numeros aleatorios na árvore com retorno
         BinaryTree tree = new BinaryTree();
 
-        tree.setRaiz(tree.insercao(new Item(10), tree.getRaiz()));
-        tree.setRaiz(tree.insercao(new Item(5), tree.getRaiz()));
-        tree.setRaiz(tree.insercao(new Item(3), tree.getRaiz()));
-        tree.setRaiz(tree.insercao(new Item(6), tree.getRaiz()));
-        tree.setRaiz(tree.insercao(new Item(7), tree.getRaiz()));
-        tree.setRaiz(tree.insercao(new Item(4), tree.getRaiz()));
-        tree.setRaiz(tree.insercao(new Item(2), tree.getRaiz()));
-        tree.setRaiz(tree.insercao(new Item(13), tree.getRaiz()));
-        tree.setRaiz(tree.insercao(new Item(16), tree.getRaiz()));
-        
-        System.out.println("Impressão por iteração: ");
-        tree.imprimeIteracao();
-        System.out.println();
-        System.out.println("------------------------------------------------");
-        System.out.println("Impressão por recursividade: ");
-        tree.imprimeOrdemCrescente();
-        System.out.println();
+        tree.setRaiz(tree.insercao(new Item(10), tree.getRaiz())); // Adiciono um numero a raiz
+        tree.setRaiz(tree.insercao(new Item(5), tree.getRaiz())); // Adiciono um numero a raiz
+        tree.setRaiz(tree.insercao(new Item(3), tree.getRaiz())); // Adiciono um numero a raiz
 
-        Scanner sc = new Scanner(System.in);
-        int x = sc.nextInt();
-        No aux = tree.retira(new Item(x), tree.getRaiz());
+//        tree.setRaiz(tree.insercao(new Item(15), tree.getRaiz())); // Adiciono um numero a raiz
 
-        System.out.println("A nova raiz é: " + aux.item);
-        System.out.println("Impressão por iteração: ");
-        tree.imprimeIteracao();
-        System.out.println();
-        System.out.println("------------------------------------------------");
-        System.out.println("Impressão por recursividade: ");
+        System.out.println(tree.getRaiz().altura);
         tree.imprimeOrdemCrescente();
         System.out.println();
 
@@ -77,8 +37,8 @@ public class main {
 //
 //        Scanner sc = new Scanner(System.in);
 //        int x = sc.nextInt();
-//        tree.getNoArvore().remove(tree.retira(new Item(x), tree.getRaiz()));
-//        
+//        tree.retira(new Item(x), tree.getRaiz());
+//
 //        System.out.println("Impressão por iteração: ");
 //        tree.imprimeIteracao();
 //        System.out.println();
