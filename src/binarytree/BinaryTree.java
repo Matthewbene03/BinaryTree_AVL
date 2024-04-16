@@ -31,11 +31,11 @@ public class BinaryTree {
             raiz.dir = insercao(item, raiz.dir);
         }
 
-        //Calcula a altura do no.
-        raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir)) + 1;
-
-        //Faz o balanceamento
-        raiz = balanceamento(raiz);
+//        //Calcula a altura do no.
+//        raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir)) + 1;
+//
+//        //Faz o balanceamento
+//        raiz = balanceamento(raiz);
 
         return raiz;
     }
@@ -66,7 +66,7 @@ public class BinaryTree {
         raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir)) + 1;
 
         //Faz o balanceamento
-        //raiz = balanceamento(raiz);
+        raiz = balanceamento(raiz);
     }
 
     //(Fim)Metodos de inserir: 
@@ -134,10 +134,11 @@ public class BinaryTree {
             }
         }
 
-        //Calcula a altura do no.
-        no.altura = maior(alturaDoNo(no.esq), alturaDoNo(no.dir)) - 1;
-        //Faz o balanceamento
-        //no = balanceamento(no);
+//        //Calcula a altura do no.
+//        no.altura = maior(alturaDoNo(no.esq), alturaDoNo(no.dir)) - 1;
+//        
+//        //Faz o balanceamento
+//        no = balanceamento(no);
 
         return no;
     }
@@ -206,24 +207,6 @@ public class BinaryTree {
         Collections.sort(noArvore);
     }
 
-    public void centralImprimir(No no, int nivel) {
-        this.imprimeArvore(no, nivel);
-    }
-
-    private void imprimeArvore(No no, int nivel) {
-        if (no != null) {
-            imprimeArvore(no.dir, nivel + 1);
-            System.out.print("\n\n");
-
-            for (int i = 0; i < nivel; i++) {
-                System.out.print("\t");
-            }
-
-            System.out.print(no.item);
-            imprimeArvore(no.esq, nivel + 1);
-        }
-    }
-
     //(Fim)Metodos para imprimir: 
     //Parte da árvore AVL (Inicio): 
     //(Inicio)Metodos para calcular altura: 
@@ -276,6 +259,8 @@ public class BinaryTree {
         futuraRaiz.esq = raiz;
         raiz.dir = filho;
 
+        raiz.altura = maior(alturaDoNo(raiz.esq), alturaDoNo(raiz.dir))+1;
+        futuraRaiz.altura = maior(alturaDoNo(futuraRaiz.esq), alturaDoNo(futuraRaiz.dir))+1;
         return futuraRaiz;
     }
 
@@ -319,9 +304,5 @@ public class BinaryTree {
 
     public No getRaiz() {
         return this.raiz;
-    }
-
-    public ArrayList<No> getNoArvore() {
-        return this.noArvore;
     }
 }
